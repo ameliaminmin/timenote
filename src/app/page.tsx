@@ -110,11 +110,14 @@ export default function Home() {
         </div>
 
         <div className="text-center">
-          <h1 className="text-4xl sm:text-5xl font-bold mb-4 bg-gradient-to-r from-gray-700 via-gray-800 to-gray-700 bg-clip-text text-transparent animate-gradient">
-            記錄每一刻，創造無限可能
+          <h1 className="text-4xl sm:text-5xl font-bold mb-4 bg-gradient-to-r from-gray-700 via-gray-800 to-gray-700 bg-clip-text text-transparent animate-gradient flex items-center justify-center gap-3">
+            時間軸筆記 - 最清晰的視角
+            <span className="text-xs px-2 py-1 bg-blue-100 text-blue-600 rounded-full font-medium tracking-wide">
+              ALPHA
+            </span>
           </h1>
           <p className="text-lg text-gray-600 dark:text-gray-300 mb-8">
-            讓時間管理變得簡單而優雅
+            從今天開始，為每一個選擇做出更有智慧的決定。
           </p>
           <div className="flex gap-4 justify-center">
             <Link
