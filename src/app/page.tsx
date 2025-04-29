@@ -46,8 +46,8 @@ export default function Home() {
               width="80"
               height="100"
               rx="8"
-              fill="#FEF3C7"
-              stroke="#FBBF24"
+              fill="#F3F4F6"
+              stroke="#9CA3AF"
               strokeWidth="2"
             />
             {/* 筆記本線條 */}
@@ -56,7 +56,7 @@ export default function Home() {
               y1="30"
               x2="90"
               y2="30"
-              stroke="#FBBF24"
+              stroke="#9CA3AF"
               strokeWidth="2"
               strokeLinecap="round"
             />
@@ -65,7 +65,7 @@ export default function Home() {
               y1="45"
               x2="90"
               y2="45"
-              stroke="#FBBF24"
+              stroke="#9CA3AF"
               strokeWidth="2"
               strokeLinecap="round"
             />
@@ -74,7 +74,7 @@ export default function Home() {
               y1="60"
               x2="90"
               y2="60"
-              stroke="#FBBF24"
+              stroke="#9CA3AF"
               strokeWidth="2"
               strokeLinecap="round"
             />
@@ -83,7 +83,7 @@ export default function Home() {
               y1="75"
               x2="90"
               y2="75"
-              stroke="#FBBF24"
+              stroke="#9CA3AF"
               strokeWidth="2"
               strokeLinecap="round"
             />
@@ -92,7 +92,7 @@ export default function Home() {
               cx="60"
               cy="90"
               r="6"
-              fill="#FBBF24"
+              fill="#9CA3AF"
             />
             <path
               d="M60 86L60 90"
@@ -110,7 +110,7 @@ export default function Home() {
         </div>
 
         <div className="text-center">
-          <h1 className="text-4xl sm:text-5xl font-bold mb-4 bg-gradient-to-r from-yellow-400 via-yellow-500 to-yellow-400 bg-clip-text text-transparent animate-gradient">
+          <h1 className="text-4xl sm:text-5xl font-bold mb-4 bg-gradient-to-r from-gray-700 via-gray-800 to-gray-700 bg-clip-text text-transparent animate-gradient">
             記錄每一刻，創造無限可能
           </h1>
           <p className="text-lg text-gray-600 dark:text-gray-300 mb-8">
@@ -119,7 +119,7 @@ export default function Home() {
           <div className="flex gap-4 justify-center">
             <Link
               href="/register"
-              className="px-6 py-3 bg-yellow-400 text-gray-900 rounded-lg hover:bg-yellow-500 transition-colors"
+              className="px-6 py-3 bg-gray-800 text-white rounded-lg hover:bg-gray-700 transition-colors"
             >
               註冊/登入
             </Link>
