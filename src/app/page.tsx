@@ -1,7 +1,32 @@
+'use client';
+
 import Image from "next/image";
 import Link from "next/link";
+import { auth } from '@/lib/firebase';
+import { useEffect, useState } from 'react';
 
 export default function Home() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      setIsLoggedIn(!!user);
+    });
+
+    return () => unsubscribe();
+  }, []);
+
+  // 如果用戶已登入，顯示主頁內容
+  if (isLoggedIn) {
+    return (
+      <div className="p-8">
+        <h1 className="text-2xl font-bold mb-4">歡迎回來！</h1>
+        <p className="text-gray-600">開始記錄你的時間吧！</p>
+      </div>
+    );
+  }
+
+  // 如果用戶未登入，顯示介紹頁
   return (
     <div className="h-screen flex flex-col items-center justify-center p-8 sm:p-20 font-[family-name:var(--font-geist-sans)]">
       <main className="flex flex-col gap-[32px] items-center justify-center w-full max-w-3xl mx-auto text-center">
@@ -23,7 +48,7 @@ export default function Home() {
               height="100"
               rx="8"
               fill="#FEF3C7"
-              stroke="#F59E0B"
+              stroke="#FBBF24"
               strokeWidth="2"
             />
             {/* 筆記本線條 */}
@@ -32,7 +57,7 @@ export default function Home() {
               y1="30"
               x2="90"
               y2="30"
-              stroke="#F59E0B"
+              stroke="#FBBF24"
               strokeWidth="2"
               strokeLinecap="round"
             />
@@ -41,7 +66,7 @@ export default function Home() {
               y1="45"
               x2="90"
               y2="45"
-              stroke="#F59E0B"
+              stroke="#FBBF24"
               strokeWidth="2"
               strokeLinecap="round"
             />
@@ -50,7 +75,7 @@ export default function Home() {
               y1="60"
               x2="90"
               y2="60"
-              stroke="#F59E0B"
+              stroke="#FBBF24"
               strokeWidth="2"
               strokeLinecap="round"
             />
@@ -59,27 +84,27 @@ export default function Home() {
               y1="75"
               x2="90"
               y2="75"
-              stroke="#F59E0B"
+              stroke="#FBBF24"
               strokeWidth="2"
               strokeLinecap="round"
             />
-            {/* 筆記本裝飾 */}
+            {/* 時鐘圖標 */}
             <circle
               cx="60"
               cy="90"
-              r="5"
-              fill="#F59E0B"
+              r="6"
+              fill="#FBBF24"
             />
             <path
-              d="M55 90L65 90"
+              d="M60 86L60 90"
               stroke="white"
-              strokeWidth="2"
+              strokeWidth="1.5"
               strokeLinecap="round"
             />
             <path
-              d="M60 85L60 95"
+              d="M60 90L63 90"
               stroke="white"
-              strokeWidth="2"
+              strokeWidth="1.5"
               strokeLinecap="round"
             />
           </svg>
