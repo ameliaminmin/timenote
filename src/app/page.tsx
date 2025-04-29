@@ -1,6 +1,5 @@
 'use client';
 
-import Image from "next/image";
 import Link from "next/link";
 import { auth } from '@/lib/firebase';
 import { useEffect, useState } from 'react';
@@ -28,7 +27,7 @@ export default function Home() {
 
   // 如果用戶未登入，顯示介紹頁
   return (
-    <div className="h-screen flex flex-col items-center justify-center p-8 sm:p-20 font-[family-name:var(--font-geist-sans)]">
+    <div className="h-screen flex flex-col items-center justify-center p-8 sm:p-20 font-[family-name:var(--font-geist-sans)] bg-white dark:bg-gray-900">
       <main className="flex flex-col gap-[32px] items-center justify-center w-full max-w-3xl mx-auto text-center">
         {/* 筆記本圖標 */}
         <div className="w-24 h-24 sm:w-32 sm:h-32">
@@ -111,7 +110,7 @@ export default function Home() {
         </div>
 
         <div className="text-center">
-          <h1 className="text-4xl sm:text-5xl font-bold mb-4 bg-gradient-to-r from-yellow-400 to-emerald-500 bg-clip-text text-transparent">
+          <h1 className="text-4xl sm:text-5xl font-bold mb-4 bg-gradient-to-r from-yellow-400 via-yellow-500 to-yellow-400 bg-clip-text text-transparent animate-gradient">
             記錄每一刻，創造無限可能
           </h1>
           <p className="text-lg text-gray-600 dark:text-gray-300 mb-8">
@@ -120,7 +119,7 @@ export default function Home() {
           <div className="flex gap-4 justify-center">
             <Link
               href="/register"
-              className="px-6 py-3 bg-gradient-to-r from-yellow-400 to-emerald-500 text-white rounded-lg hover:opacity-90 transition-opacity"
+              className="px-6 py-3 bg-yellow-400 text-gray-900 rounded-lg hover:bg-yellow-500 transition-colors"
             >
               註冊/登入
             </Link>

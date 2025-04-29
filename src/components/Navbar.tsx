@@ -30,14 +30,14 @@ export default function Navbar() {
     }
 
     return (
-        <nav className="w-48 bg-gray-50 border-r border-gray-200 flex flex-col h-screen sticky top-0">
+        <nav className="w-48 bg-white border-r border-gray-200 flex flex-col h-screen sticky top-0">
             {/* 上方內容區域 */}
             <div className="p-4 flex-1">
                 <div className="space-y-4">
                     <div className="flex items-center space-x-2">
-                        <div className="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center">
+                        <div className="w-8 h-8 rounded-full bg-yellow-100 flex items-center justify-center">
                             <svg
-                                className="w-5 h-5 text-gray-600"
+                                className="w-5 h-5 text-yellow-600"
                                 fill="none"
                                 stroke="currentColor"
                                 viewBox="0 0 24 24"
@@ -60,7 +60,7 @@ export default function Navbar() {
                     <div className="space-y-2">
                         <Link
                             href="/"
-                            className={`flex items-center space-x-2 text-sm text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-lg px-3 py-2 transition-colors ${pathname === '/' ? 'bg-gray-100 text-gray-900' : ''
+                            className={`flex items-center space-x-2 text-sm text-gray-600 hover:text-gray-900 hover:bg-yellow-50 rounded-lg px-3 py-2 transition-colors ${pathname === '/' ? 'bg-yellow-50 text-gray-900' : ''
                                 }`}
                         >
                             <svg
@@ -80,7 +80,7 @@ export default function Navbar() {
                         </Link>
                         <Link
                             href="/notes"
-                            className={`flex items-center space-x-2 text-sm text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-lg px-3 py-2 transition-colors ${pathname === '/notes' ? 'bg-gray-100 text-gray-900' : ''
+                            className={`flex items-center space-x-2 text-sm text-gray-600 hover:text-gray-900 hover:bg-yellow-50 rounded-lg px-3 py-2 transition-colors ${pathname === '/notes' ? 'bg-yellow-50 text-gray-900' : ''
                                 }`}
                         >
                             <svg
@@ -100,7 +100,7 @@ export default function Navbar() {
                         </Link>
                         <Link
                             href="/calendar"
-                            className={`flex items-center space-x-2 text-sm text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-lg px-3 py-2 transition-colors ${pathname === '/calendar' ? 'bg-gray-100 text-gray-900' : ''
+                            className={`flex items-center space-x-2 text-sm text-gray-600 hover:text-gray-900 hover:bg-yellow-50 rounded-lg px-3 py-2 transition-colors ${pathname === '/calendar' ? 'bg-yellow-50 text-gray-900' : ''
                                 }`}
                         >
                             <svg
@@ -126,7 +126,7 @@ export default function Navbar() {
                 <div className="space-y-2">
                     <button
                         onClick={() => auth.signOut()}
-                        className="flex items-center justify-center space-x-2 w-full bg-gray-100 text-sm text-gray-700 hover:bg-gray-200 rounded-lg px-3 py-2 transition-colors"
+                        className="flex items-center justify-center space-x-2 w-full bg-gray-100 text-sm text-gray-700 hover:bg-yellow-50 rounded-lg px-3 py-2 transition-colors"
                     >
                         <svg
                             className="w-5 h-5"
