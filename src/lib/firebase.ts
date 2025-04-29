@@ -26,6 +26,7 @@ export interface UserData {
     displayName: string;
     createdAt: Date;
     birthDate?: string;
+    expectedLifespan?: string;
 }
 
 // 註冊新用戶
