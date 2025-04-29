@@ -1,24 +1,62 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# TimeNote 時間筆記
 
-## Getting Started
+這是一個使用現代化技術棧構建的網頁應用程序。
 
-First, run the development server:
+## 技術棧
 
+- Next.js 14 (App Router)
+- React
+- TypeScript
+- Tailwind CSS
+- ESLint
+
+## 開發環境要求
+
+- Node.js 18.17 或更高版本
+- npm 9.0 或更高版本
+
+## 快速開始
+
+1. 安裝依賴：
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. 啟動開發服務器：
+```bash
+npm run dev
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+3. 打開瀏覽器訪問 [http://localhost:3000](http://localhost:3000)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 專案結構
+
+```
+timenote/
+├── src/                    # 源代碼目錄
+│   └── app/               # Next.js 應用程序目錄
+├── public/                # 靜態資源目錄
+├── node_modules/         # 依賴包
+└── package.json          # 項目配置文件
+```
+
+## 可用的命令
+
+- `npm run dev` - 啟動開發服務器
+- `npm run build` - 構建生產版本
+- `npm start` - 啟動生產服務器
+- `npm run lint` - 運行 ESLint 檢查代碼
+
+## 代碼規範
+
+- 使用 TypeScript 進行類型檢查
+- 使用 ESLint 進行代碼質量控制
+- 使用 Prettier 進行代碼格式化
+- 遵循 Next.js 14 的最佳實踐
+
+## 版本控制
+
+本項目使用 Git 進行版本控制。請確保在提交代碼時遵循良好的 Git 提交信息規範。
 
 ## Learn More
 
