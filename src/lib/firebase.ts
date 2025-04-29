@@ -25,6 +25,7 @@ export interface UserData {
     email: string;
     displayName: string;
     createdAt: Date;
+    birthDate?: string;
 }
 
 // 註冊新用戶
@@ -76,6 +77,15 @@ export const getUserData = async (userId: string) => {
             return userDoc.data() as UserData;
         }
         return null;
+    } catch (error) {
+        throw error;
+    }
+};
+
+// 更新用戶資料
+export const updateUserData = async (userId: string, data: Partial<UserData>) => {
+    try {
+        await setDoc(doc(db, 'users', userId), data, { merge: true });
     } catch (error) {
         throw error;
     }
