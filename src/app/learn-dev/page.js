@@ -10,14 +10,15 @@ export default function LearnDev() {
                         <button className="px-3 py-1.5 text-sm bg-gray-100 text-gray-600 rounded-lg hover:bg-gray-200 transition-colors duration-200 shadow-sm">
                             2 年
                         </button>
+                        <button className="px-3 py-1.5 text-sm bg-gray-100 text-gray-600 rounded-lg hover:bg-gray-200 transition-colors duration-200 shadow-sm">
+                            12 個月
+                        </button>
                         <button className="px-3 py-1.5 text-sm bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors duration-200 shadow-sm">
-                            1 年
+                            52 週
                         </button>
+
                         <button className="px-3 py-1.5 text-sm bg-gray-100 text-gray-600 rounded-lg hover:bg-gray-200 transition-colors duration-200 shadow-sm">
-                            月
-                        </button>
-                        <button className="px-3 py-1.5 text-sm bg-gray-100 text-gray-600 rounded-lg hover:bg-gray-200 transition-colors duration-200 shadow-sm">
-                            週
+                            1 週
                         </button>
                     </div>
                 </div>
