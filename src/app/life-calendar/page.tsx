@@ -71,7 +71,7 @@ export default function LifeCalendar() {
                 cells.push(
                     <div
                         key={year}
-                        className={`w-8 h-8 transition-colors duration-300 ${isPast ? 'bg-yellow-300' : 'bg-gray-100'
+                        className={`w-20 h-10 transition-colors duration-300 ${isPast ? 'bg-yellow-300' : 'bg-gray-100'
                             }`}
                         title={`${year}歲`}
                     />
