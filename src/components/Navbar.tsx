@@ -10,6 +10,16 @@ export default function Navbar() {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [userData, setUserData] = useState<UserData | null>(null);
     const [isCollapsed, setIsCollapsed] = useState(false);
+    const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
+
+    const handleLogout = async () => {
+        try {
+            await auth.signOut();
+            setIsUserMenuOpen(false);
+        } catch (error) {
+            console.error('登出時發生錯誤：', error);
+        }
+    };
 
     useEffect(() => {
         const unsubscribe = auth.onAuthStateChanged(async (user) => {
@@ -72,11 +82,42 @@ export default function Navbar() {
                                     />
                                 </svg>
                             </div>
-                            <div className="flex flex-col">
-                                <span className="text-base font-medium text-gray-900">TimeNote</span>
-                                <span className="text-xs text-gray-500 truncate max-w-[120px]">
-                                    {userData?.displayName || '載入中...'}
-                                </span>
+                            <div className="relative">
+                                <button
+                                    onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}
+                                    className="flex flex-col items-start hover:bg-gray-50 rounded-lg px-2 py-1 transition-colors"
+                                >
+                                    <span className="text-base font-medium text-gray-900">
+                                        {userData?.displayName ? `${userData.displayName} 's Note` : 'Note'}
+                                    </span>
+                                </button>
+
+                                {/* 下拉選單 */}
+                                {isUserMenuOpen && (
+                                    <div className="absolute left-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 z-50">
+                                        <div className="py-1">
+                                            <button
+                                                onClick={handleLogout}
+                                                className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 flex items-center space-x-2"
+                                            >
+                                                <svg
+                                                    className="w-5 h-5 text-gray-500"
+                                                    fill="none"
+                                                    stroke="currentColor"
+                                                    viewBox="0 0 24 24"
+                                                >
+                                                    <path
+                                                        strokeLinecap="round"
+                                                        strokeLinejoin="round"
+                                                        strokeWidth={2}
+                                                        d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
+                                                    />
+                                                </svg>
+                                                <span>登出</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                )}
                             </div>
                         </div>
                         <div className="space-y-2">
