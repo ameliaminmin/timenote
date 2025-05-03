@@ -1,7 +1,7 @@
 // Firebase 配置文件
 import { initializeApp } from 'firebase/app';
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from 'firebase/auth';
-import { getFirestore, doc, setDoc, getDoc } from 'firebase/firestore';
+import { getFirestore, doc, setDoc, getDoc, collection, getDocs } from 'firebase/firestore';
 
 // Firebase 配置
 const firebaseConfig = {
@@ -27,6 +27,16 @@ export interface UserData {
     createdAt: Date;
     birthDate?: string;
     expectedLifespan?: string;
+}
+
+// 筆記資料介面
+export interface NoteData {
+    title: string;
+    content: string;
+    tags: string[];
+    weekNumber: number;
+    createdAt: Date;
+    updatedAt: Date;
 }
 
 // 註冊新用戶
@@ -87,6 +97,37 @@ export const getUserData = async (userId: string) => {
 export const updateUserData = async (userId: string, data: Partial<UserData>) => {
     try {
         await setDoc(doc(db, 'users', userId), data, { merge: true });
+    } catch (error) {
+        throw error;
+    }
+};
+
+// 保存筆記
+export const saveNote = async (userId: string, noteData: Omit<NoteData, 'createdAt' | 'updatedAt'>) => {
+    try {
+        const noteWithTimestamps: NoteData = {
+            ...noteData,
+            createdAt: new Date(),
+            updatedAt: new Date()
+        };
+
+        const noteRef = doc(db, 'users', userId, 'note-list', `week-${noteData.weekNumber}`);
+        await setDoc(noteRef, noteWithTimestamps);
+        return noteRef.id;
+    } catch (error) {
+        throw error;
+    }
+};
+
+// 獲取用戶的筆記
+export const getUserNotes = async (userId: string) => {
+    try {
+        const notesRef = collection(db, 'users', userId, 'note-list');
+        const notesSnapshot = await getDocs(notesRef);
+        return notesSnapshot.docs.map(doc => ({
+            id: doc.id,
+            ...doc.data()
+        })) as NoteData[];
     } catch (error) {
         throw error;
     }

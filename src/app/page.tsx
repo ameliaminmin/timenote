@@ -27,7 +27,7 @@ export default function Home() {
 
   // 如果用戶未登入，顯示介紹頁
   return (
-    <div className="h-screen flex flex-col items-center justify-center p-8 sm:p-20 font-[family-name:var(--font-geist-sans)] bg-white dark:bg-gray-900">
+    <div className="h-screen flex flex-col items-center justify-center p-4 sm:p-20 font-[family-name:var(--font-geist-sans)] bg-white dark:bg-gray-900">
       <main className="flex flex-col gap-[32px] items-center justify-center w-full max-w-3xl mx-auto text-center">
         {/* 筆記本圖標 */}
         <div className="w-24 h-24 sm:w-32 sm:h-32">
