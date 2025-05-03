@@ -1,6 +1,6 @@
 'use client';
-import { useState } from 'react';
-import { auth, saveNote } from '@/lib/firebase';
+import { useState, useEffect } from 'react';
+import { auth, saveNote, getUserNotes } from '@/lib/firebase';
 import { useRouter } from 'next/navigation';
 
 export default function LearnDev() {
@@ -9,14 +9,55 @@ export default function LearnDev() {
     const [selectedWeek, setSelectedWeek] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(null);
+    const [notes, setNotes] = useState({});
     const [formData, setFormData] = useState({
         title: '',
         content: '',
         tags: ''
     });
 
+    // 獲取用戶筆記數據
+    useEffect(() => {
+        const fetchNotes = async () => {
+            try {
+                const user = auth.currentUser;
+                if (!user) {
+                    router.push('/login');
+                    return;
+                }
+
+                const userNotes = await getUserNotes(user.uid);
+                const notesMap = {};
+                userNotes.forEach(note => {
+                    notesMap[note.weekNumber] = note;
+                });
+                setNotes(notesMap);
+            } catch (err) {
+                console.error('獲取筆記失敗:', err);
+                setError('獲取筆記失敗');
+            }
+        };
+
+        fetchNotes();
+    }, [router]);
+
     const handleWeekClick = (weekNumber) => {
         setSelectedWeek(weekNumber);
+        // 如果已有筆記，填充表單
+        if (notes[weekNumber]) {
+            setFormData({
+                title: notes[weekNumber].title,
+                content: notes[weekNumber].content,
+                tags: notes[weekNumber].tags.join(', ')
+            });
+        } else {
+            // 重置表單
+            setFormData({
+                title: '',
+                content: '',
+                tags: ''
+            });
+        }
         setIsModalOpen(true);
         setError(null);
     };
@@ -49,14 +90,20 @@ export default function LearnDev() {
                 weekNumber: selectedWeek
             });
 
-            // 重置表單
-            setFormData({
-                title: '',
-                content: '',
-                tags: ''
-            });
+            // 更新本地筆記數據
+            setNotes(prev => ({
+                ...prev,
+                [selectedWeek]: {
+                    title: formData.title,
+                    content: formData.content,
+                    tags,
+                    weekNumber: selectedWeek,
+                    createdAt: new Date(),
+                    updatedAt: new Date()
+                }
+            }));
+
             setIsModalOpen(false);
-            router.refresh(); // 刷新頁面以顯示新數據
         } catch (err) {
             setError(err.message);
         } finally {
@@ -90,13 +137,54 @@ export default function LearnDev() {
                             <div className="grid grid-cols-1">
                                 {Array.from({ length: 13 }, (_, rowIndex) => {
                                     const weekNumber = colIndex * 13 + rowIndex + 1;
+                                    const note = notes[weekNumber];
                                     return (
                                         <button
                                             key={weekNumber}
-                                            className="p-2 border border-gray-200 text-sm text-gray-600 hover:bg-gray-50 transition-colors duration-200"
+                                            className={`p-3 border text-sm hover:bg-gray-50 transition-all duration-200 ${note
+                                                ? 'bg-white border-blue-200 shadow-sm hover:shadow-md'
+                                                : 'border-gray-200 text-gray-600'
+                                                }`}
                                             onClick={() => handleWeekClick(weekNumber)}
                                         >
-                                            {weekNumber}
+                                            <div className="flex flex-col items-start w-full">
+                                                <div className="flex justify-between items-center w-full mb-2">
+                                                    <span className={`font-medium ${note ? 'text-blue-600' : 'text-gray-600'
+                                                        }`}>
+                                                        第 {weekNumber} 週
+                                                    </span>
+                                                    {note && (
+                                                        <span className="text-xs text-gray-400">
+                                                            {new Date(note.updatedAt).toLocaleDateString('zh-TW', {
+                                                                month: 'short',
+                                                                day: 'numeric'
+                                                            })}
+                                                        </span>
+                                                    )}
+                                                </div>
+                                                {note && (
+                                                    <div className="w-full space-y-2">
+                                                        <div className="text-sm font-medium text-gray-900 line-clamp-1">
+                                                            {note.title}
+                                                        </div>
+                                                        <div className="text-xs text-gray-500 line-clamp-2">
+                                                            {note.content}
+                                                        </div>
+                                                        {note.tags.length > 0 && (
+                                                            <div className="flex flex-wrap gap-1 mt-2">
+                                                                {note.tags.map((tag, index) => (
+                                                                    <span
+                                                                        key={index}
+                                                                        className="px-2 py-0.5 bg-blue-50 text-blue-600 text-xs rounded-full border border-blue-100"
+                                                                    >
+                                                                        {tag}
+                                                                    </span>
+                                                                ))}
+                                                            </div>
+                                                        )}
+                                                    </div>
+                                                )}
+                                            </div>
                                         </button>
                                     );
                                 })}

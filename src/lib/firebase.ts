@@ -124,10 +124,18 @@ export const getUserNotes = async (userId: string) => {
     try {
         const notesRef = collection(db, 'users', userId, 'note-list');
         const notesSnapshot = await getDocs(notesRef);
-        return notesSnapshot.docs.map(doc => ({
-            id: doc.id,
-            ...doc.data()
-        })) as NoteData[];
+        return notesSnapshot.docs.map(doc => {
+            const data = doc.data();
+            return {
+                id: doc.id,
+                title: data.title,
+                content: data.content,
+                tags: data.tags,
+                weekNumber: data.weekNumber,
+                createdAt: data.createdAt?.toDate(),
+                updatedAt: data.updatedAt?.toDate()
+            } as NoteData;
+        });
     } catch (error) {
         throw error;
     }
